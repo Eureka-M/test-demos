@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let callA = () => {
+            return new Promise((resolve, reject) => {
+                if (1) {
+                    setTimeout(() => {
+                        reject()
+                    }, 500)
+                }
+            })
+        }
+
+        let callB = () => {
+            return new Promise((resolve, reject) => {
+                callA().catch(() => {
+                    reject()
+                    console.log('catch callA reject')
+                })
+            })
+        }
+
+        let callC = () => {
+            return new Promise((resolve, reject) => {
+                callB().catch(() => {
+                    console.log('catch callB reject')
+                    reject()
+                })
+            })
+        }
+
+        let callD = () => {
+            return callB()
+        }
+        
+        callD()
+        callC()
+
+
+        function setTimer () {
+            window.setTimeout(function () {
+                console.log('setTimeout callback')
+            }, 500)
+        }
+        setTimer()
+        setTimer()
+
+    </script>
+</body>
+</html>

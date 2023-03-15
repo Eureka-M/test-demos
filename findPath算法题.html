@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var alphabetBoardPath = function(target) {
+        var targetArr = target.split('')
+        var board = ["abcde", "fghij", "klmno", "pqrst", "uvwxy", "z"]
+        let current = 'a'
+        let total = ''
+
+        targetArr.forEach((item) => {
+            console.log(current, item)
+            total += findWay(current, item)
+            current = item
+        })
+
+        return total
+
+        function findPos(c) {
+            let x = 0
+            let y = 0
+            board.forEach((item, index) => {
+                if (item.indexOf(c) !== -1) {
+                    x = item.indexOf(c)
+                    y = index
+                }
+            })
+            return {
+                x: x,
+                y: y
+            }
+        }
+
+        function findWay(x, y) {
+            let from = findPos(x)
+            let to = findPos(y)
+            let way = ''
+            let endWay = ''
+            if (x == 'z') {
+                from = findPos('u')
+                way = 'U'
+            }
+            if (y == 'z') {
+                to = findPos('u')
+                endWay = 'D'
+            }
+            if (from.x == to.x && from.y == to.y) {
+                way += '!'
+            }
+            else {
+                if (from.x < to.x) {
+                    let step = to.x - from.x
+                    way += countW(step, 'R')
+                }
+                if (from.x > to.x) {
+                    let step = from.x - to.x
+                    way += countW(step, 'L')
+                }
+                if (from.y < to.y) {
+                    let step = to.y - from.y
+                    way += countW(step, 'D')
+                }
+                if (from.y > to.y) {
+                    let step = from.y - to.y
+                    way += countW(step, 'U')
+                }
+            }
+
+            return way + endWay + '!'
+        }
+
+        function countW(time, way) {
+            let res = ''
+            while (time) {
+                res += way
+                time--
+            }
+            return res
+        }
+
+    };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<div class="seat-item" :data-theme="themeColor">
+    <div class="vip" v-if="isVip"></div>
+    <div class="owner-img" v-if="ownerImg">
+        <div class="img-block" :class="{'is-self': isMe}">
+            <img :src="ownerImg" alt="">
+        </div>
+    </div>
+    <div class="owner-head" v-if="ownerImg"></div>
+</div>

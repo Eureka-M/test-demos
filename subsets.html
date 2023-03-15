@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var subsetXORSum = function(nums) {
+            let res = 0
+            let subsets = []
+            for (let i = 0; i < nums.length; i++) {
+                if (i !== 0) {
+                    let tempSubsetLength = subsets.length
+                    for (let j = 0; j < tempSubsetLength; j++) {
+                        let s = JSON.parse(JSON.stringify(subsets[j]))
+                        s.push(nums[i])
+                        subsets.push(s)
+                    }
+                }
+                subsets.push([nums[i]])
+            }
+
+            for (let i = 0; i < subsets.length; i++) {
+                let temp = 0
+                for (let j = 0; j < subsets[i].length; j++) {
+                    temp ^= subsets[i][j]
+                }
+                res += temp
+            }
+
+            return res
+        };
+        subsetXORSum([1, 3])
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+        <title>直播聚合</title>
+    </head>
+    <body>
+        <script>
+            var climbStairs = function(n) {
+    var arr = []
+    return depth(n)
+
+    function depth(n) {
+        let v = findValue(n)
+        if (v) {
+            return v
+        }
+        else {
+            if (n == 1 || n == 0) {
+                return 1
+            }
+            else {
+                saveValue(n, depth(n - 1) + depth(n - 2))
+                return depth(n - 1) + depth(n - 2)
+            }
+        }
+    }
+
+    function saveValue(k, val) {
+        arr.push({ key: k, value: val})
+    }
+
+    function findValue(n) {
+        let index = arr.findIndex((item) => { return item.key == n })
+        if (index !== -1) {
+            return arr[index]
+        }
+        else {
+            return 0
+        }
+    }
+
+}
+
+climbStairs(3)
+        </script>
+    </body>
+</html>

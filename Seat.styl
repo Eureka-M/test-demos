@@ -1,0 +1,63 @@
+.seat-item {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    .vip {
+        position: absolute;
+        top: -2px;
+        right: -1px;
+        background: url('../img/vip.png');
+        background-size: 100% 100%;
+        width: 3vw;
+        height: 3vw;
+    }
+    .owner-img {
+        width: 50%;
+        height: 0;
+        padding-bottom: 50%;
+        position: absolute;
+        top: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        .img-block {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            border-radius: 50%;
+            &.is-self {
+                border: 2px solid #FF9A00;
+            }
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                border: 1px solid #4A70A7;
+                
+            }
+        }
+    }
+    .owner-head {
+        width: 40%;
+        height: 0;
+        padding-bottom: 40%;
+        position: absolute;
+        top: -14%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: url('../img/head.png');
+        background-size: 100% 100%;
+        z-index: -1;
+    }
+}
+.seat-item[data-theme="red"] {
+    background: url('../img/chair-red.png');
+    background-size: 100% 100%;
+}
+.seat-item[data-theme="green"] {
+    background: url('../img/chair-green.png');
+    background-size: 100% 100%;
+}
+.seat-item[data-theme="blue"] {
+    background: url('../img/chair-blue.png');
+    background-size: 100% 100%;
+}

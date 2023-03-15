@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<ul class="g-wrap">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ul class="g-wrap">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+	</body>
+	<script>
+		let btn = document.getElementById("box");
+		// animation: drawHeart 13s linear forwards;
+		let icon = document.getElementById("heart");
+		let status = false
+		btn.addEventListener("click",()=>{
+			if(status == false){
+				icon.style = "animation: drawHeart 1s linear forwards;stroke: #d81e06;"
+			}else{
+				icon.style = ""
+			}
+			status = !status
+		})
+	</script>
+	<style>
+		body{
+			background: #f5f5f5;
+		}
+		#box{
+			width: 200px;
+			height: 200px;
+			margin: 300px auto;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		#heart{
+			fill: #fff;
+			/* stroke属性,可应用于任何种类的线条,文字和元素,就像一个圆的轮廓 */
+			/* stroke: #d81e06; */
+			/* 线条宽度 */
+			stroke-width: 40px;
+			/* 设置线条为虚线,虚线的长度 */
+			stroke-dasharray: 2600;
+			/* 虚线的位移 */
+			stroke-dashoffset: 2600;
+			/* 端点为圆头 */
+			stroke-linecap: round;
+		}
+		@keyframes drawHeart{
+			0%{
+			    stroke: #d81e06;
+			    stroke-dashoffset: 2600;
+			}
+			25%{
+			    stroke: #d81e06;
+			    stroke-dashoffset: 0;
+			    fill: #eee;
+			}
+			50%{
+			    
+				transform: scale(1);
+			}
+			75%{
+			    transform: scale(1.2);
+			}
+			100%{
+				stroke: #d81e06;
+				stroke-dashoffset: 0;
+				fill: #d81e06;
+			    transform: scale(1);
+			}
+		}
+	</style>
+</html>
+

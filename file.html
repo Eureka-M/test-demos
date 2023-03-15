@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+ * @param {string[]} names
+ * @return {string[]}
+ */
+var getFolderNames = function(names) {
+    var result = []
+    names.forEach((item, index) => {
+        if (index == 0) {
+            result.push(item)
+        }
+        else {
+            // 之前有过相同的值 要加(K)
+            if (result.indexOf(item) !== -1) {
+                //  有 (K)
+                if (item.indexOf('(') !== -1) {
+                    result.push(item + '(1)')
+                }
+                // 无 (K)
+                else {
+                    let lastArr = result.filter((i) => {
+                        return i.indexOf(item) !== -1
+                    })
+                    let last = lastArr[lastArr.length - 1]
+                    let k = 0
+                    let startIndex = last.lastIndexOf('(') + 1
+                    let endIndex = last.lastIndexOf(')')
+                    k = (+last.substring(startIndex, endIndex)) + 1
+                    result.push(item + '(' + k + ')')
+                }
+            }
+            else {
+                result.push(item)
+            }
+        }
+    })
+    return result
+};
+    </script>
+</body>
+</html>

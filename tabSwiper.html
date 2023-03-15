@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tab +  swiper</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        .box {
+            width: 100%;
+            height: 200px;
+            background: pink;
+        }
+        .tabs {
+            width: 100%;
+            height: 50px;
+            background: #e88f9e;
+            display: flex;
+            align-items: center;
+        }
+        .tabs span {
+            flex: 1;
+            text-align: center;
+        }
+        .swiper {
+            height: calc(100vh - 50px);
+            background: #8fe8d883;
+            position: relative;
+            overflow: hidden;
+        }
+        .swiper-content {
+            width: calc(4 * 100vw);
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+        }
+        .swiper-content >div {
+            flex: 1;
+        }
+        .swiper-1 {
+            height: 100%;
+            background: red;
+            overflow-y: scroll;
+        }
+        .swiper-2 {
+            height: 100%;
+            background: rgb(255, 123, 0);
+        }
+        .swiper-3 {
+            height: 100%;
+            background: rgb(225, 255, 0);
+        }
+        .swiper-4 {
+            height: 100%;
+            background: rgb(55, 255, 0);
+        }
+        .content-1 {
+            height: 200%;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="tabs">
+        <span>tab1</span>
+        <span>tab2</span>
+        <span>tab3</span>
+        <span>tab4</span>
+    </div>
+    <div class="swiper">
+        <div class="swiper-content">
+            <div class="swiper-1">
+                <div class="content-1">content-1</div>
+            </div>
+            <div class="swiper-2">
+                <div class="content-2">content-2</div>
+            </div>
+            <div class="swiper-3">
+                <div class="content-3">content-3</div>
+            </div>
+            <div class="swiper-4">
+                <div class="content-4">content-4</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

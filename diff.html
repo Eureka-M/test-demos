@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var minSteps = function(s, t) {
+    let sArr = s.split('')
+    let tArr = t.split('')
+    let sMap = new Map()
+    let tMap = new Map()
+    let result = 0
+
+    sArr.forEach((item) => {
+        let value = sMap.get(item) == undefined ? 1 : sMap.get(item) + 1
+        sMap.set(item, value)
+    })
+
+    tArr.forEach((item) => {
+        let value = tMap.get(item) == undefined ? 1 : tMap.get(item) + 1
+        tMap.set(item, value)
+    })
+    
+    tMap.forEach((v, item) => {
+        if (!(sMap.has(item) && tMap.get(item) == sMap.get(item))) {
+            if (!sMap.has(item)) {
+                result += tMap.get(item)
+            }
+            else {
+                result += Math.abs(tMap.get(item) - sMap.get(item))
+            }
+        }
+    })
+
+    sMap.forEach((v, item) => {
+        if (!tMap.get(item)) {
+            result += sMap.get(item)
+        }
+    })
+
+    return result
+};
+ </script>
+</body>
+</html>

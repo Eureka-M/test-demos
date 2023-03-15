@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bubble-box {
+            padding: 10px;
+            background: rgb(2, 171, 255);
+            display: inline-block;
+            border-radius: 3px;
+            border-top-left-radius: 0px;
+            position: relative;
+            margin-top: 10px;
+            color: #fff;
+            font-size: 12px;
+            max-width: 300px;
+        }
+        .inner-circle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: -6px;
+            left: 0;
+            background: #000;
+            background:radial-gradient(circle at 22px 0, transparent 20px, rgb(2, 171, 255) 21px);
+        }
+        .outside-circle {
+            position: absolute;
+            left: 0px;
+            top: -14px;
+            width: 20px;
+            height: 14px;
+            background: transparent;
+            overflow: hidden;
+            border-top-left-radius: 2px;
+        }
+        .outside-circle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: rgb(2, 171, 255);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="bubble-box">
+        <div class="outside-circle">
+            <div class="inner-circle"></div>
+        </div>
+        <div class="context">bubble context context center：渐变起点的位置，可以为百分比，默认是图形的正中心。</div>
+    </div>
+
+    <div>
+        换行 <br> 换行2 不换行2 <br> 换行3 <br> 换行3-1
+        难道这样就不换行啦
+    </div>
+</body>
+</html>

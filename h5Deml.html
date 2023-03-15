@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <title>h5 demo</title>
+    </head>
+    <body>
+        <span id="openApp">进入App</span>
+        <script>
+            var iosBrower = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
+            window.dwTimer = null
+            if (iosBrower) {
+                window.addEventListener('pagehide', function () {
+                    this.dwTimer = 'success'
+                })
+            } else {
+                window.addEventListener('onunload', function () {
+                    this.dwTimer = 'success'
+                })
+            }
+
+            var btn = document.getElementById('openApp')
+            btn.addEventListener('click', function (e) {
+                var appUrl = 'dwzq://com.soochow.showcai/'
+                window.location.assign(appUrl)
+                var count = 0
+                var intervalTimer = window.setInterval(function () {
+                    count += 1
+                    if (count > 10) {
+                        window.clearInterval(intervalTimer)
+                        console.log('timer' + window.dwTimer + count)
+                        if (!window.dwTimer) {
+                            toDownload()
+                        }
+                    }
+
+                    if (window.dwTimer === 'success') {
+                        window.clearInterval(intervalTimer)
+                    }
+                }, 200)
+            })
+
+            function toDownload () {
+                if (iosBrower) {
+                    // 跳转appstore
+                    window.location.assign("https://apps.apple.com/cn/app/id1041288958");
+                } else {
+                    window.location.assign(
+                        "https://minio.showcai.com.cn:10443/dwgw/download/software/package/hqjy/android/DWZQ_108_signed.apk"
+                    );
+                }
+            }
+        </script>
+    </body>
+</html>
