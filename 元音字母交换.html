@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var reverseVowels = function(s) {
+            let vowelArrs = ['a', 'e', 'i', 'o', 'u']
+
+            let sArr = s.split('')
+            let start = 0
+            let end = sArr.length - 1
+            
+            while(start < end) {
+                // start end 指针都指向 元音字母，交换
+                let isStartVowel = vowelArrs.indexOf(sArr[start]) !== -1 
+                let isEndVowel = vowelArrs.indexOf(sArr[end]) !== -1
+                if (isStartVowel && isEndVowel) {
+                    [sArr[start], sArr[end]] = [sArr[end], sArr[start]]
+                    start++
+                    end--
+                } else if (isStartVowel && !isEndVowel) {
+                    end--
+                } else if (!isStartVowel && isEndVowel) {
+                    start++
+                } else {
+                    start++
+                    end--
+                }
+            }
+            return sArr.join()
+        };
+    </script>
+</body>
+</html>

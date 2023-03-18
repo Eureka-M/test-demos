@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var answerQueries = function(nums, queries) {
+            let result = []
+            let sortNums = nums.sort((a, b) => {
+                return a - b
+            })
+            queries.forEach((item) => {
+                let resultItem = 0
+                let res = 0
+                try {
+                    sortNums.forEach((n, index) => {
+                        res += n
+                        if (res > item) {
+                            resultItem = index
+                            throw new Error('loopTerminates')
+                        }
+                        else {
+                            if (index == sortNums.length - 1) {
+                                resultItem = sortNums.length
+                            }
+                        }
+                    })
+                } catch (e) {
+                    if (e.message !== 'loopTerminates') {
+                        throw e
+                    }
+                }
+                result.push(resultItem)
+            })
+            return result
+        };
+    </script>
+</body>
+</html>
