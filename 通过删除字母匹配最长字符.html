@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var findLongestWord = function(s, dictionary) {
+            let word = ''
+
+            dictionary.forEach((item) => {
+                if (item == s) {
+                    // 其实这里还可以终止循环
+                    word = item
+                }
+                else if (item.length < s.length) {
+                    // item 的指针
+                    let start1 = 0
+                    // s 的指针
+                    let start2 = 0
+                    while (start1 < item.length && start2 < s.length) {
+                        if (item[start1] == s[start2]) {
+                            start1++
+                        }
+                        start2++
+                    }
+                    // 当 start1 < length && start2 > length 表示没找到
+                    if (!(start2 >= s.length && start1 < item.length)) {
+                        if (item.length > word.length) {
+                            word = item
+                        } else if (item.length == word.length) {
+                            word = word < item ? word : item
+                        }
+                    } 
+                }
+            
+            })
+            return word
+        };
+        findLongestWord("abpcplea", ["ale","apple","monkey","plea", "abpcplaaa","abpcllllll","abccclllpppeeaaaa"])
+    </script>
+</body>
+</html>
