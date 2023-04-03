@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getPromise(cb) {
+            let _res, _rej
+
+            const promise = new Promise((resolve, reject) => {
+                _res = resolve
+                _rej = reject
+                cb && cb(resolve, reject)
+            })
+
+            return {
+                promise,
+                abort: () => {
+                    _rej({
+                        name: 'abort',
+                        message: 'the promise is aborted'
+                    })
+                }
+            }
+        }
+
+        function runCb(resolve, reject) {
+            setTimeout(() => {
+                resolve()
+            }, 3000)
+        }
+
+        const { promise, abort } = getPromise(runCb)
+
+        promise.then().catch((e) => {
+            console.log(e)
+        })
+
+        setTimeout(() => {
+            abort()
+        }, 1000)
+    </script>
+</body>
+</html>
