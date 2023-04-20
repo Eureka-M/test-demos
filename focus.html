@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea id="myTextarea"></textarea>
+    <button id="myButton">聚焦</button>
+    <script>
+    const textarea = document.getElementById("myTextarea");
+
+    function focus() {
+        // setTimeout 里 focus 无效
+        // setTimeout(() => {
+        //     textarea.focus();
+        // }, 300)
+        // textarea.focus()
+
+        // 解决 setSelectionRange 会 focus，又 blur 导致键盘弹起隐藏的闪烁问题
+        textarea.disabled = true;
+        textarea.setSelectionRange(0, 0);
+        textarea.disabled = false;
+        textarea.blur();
+    }
+
+    // 按钮点击事件处理程序
+    const button = document.getElementById("myButton");
+    button.addEventListener("click", function() {
+        focus()
+    });
+    </script>
+</body>
+</html>
