@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let content = `【主题】chatGPT对人类的影响调查
+
+【单选题】您是否使用过chatGPT？ 
+A.是 
+B.否 
+
+【单选题】您认为chatGPT对人类的影响是？ 
+A.积极的 
+B.消极的 
+C.中性的 
+
+【单选题】您认为chatGPT是否会取代人类的某些工作？ 
+A.是 
+B.否 
+
+【单选题】您认为chatGPT是否会对人类的语言能力产生影响？ 
+A.是 
+B.否 
+
+【多选题】您认为chatGPT会对以下哪些领域产生影响？ 
+A.教育 
+B.医疗 
+C.金融 
+D.娱乐 
+E.其他（请填写）__________ 
+
+【填空题】请简要说明您对chatGPT的看法：_____________________________`
+        function renderQuestionnaire(content) {
+            let questionList = content.split('\n\n')
+            let questionnaire = {}
+
+            questionnaire.questions = [
+                { displayOrder: 1, isDisplay: '0', isForce: '0', title: '姓名', type: '4' },
+                { displayOrder: 2, isDisplay: '0', isForce: '0', title: '手机号', type: '4' },
+                { displayOrder: 3, isDisplay: '0', isForce: '0', title: '邮箱', type: '4' }
+            ]
+
+            questionList.forEach((item) => {
+                if (item.indexOf('【主题】') !== -1) {
+                    questionnaire.title = questionList[0].replace('【主题】', '')
+                }
+                if (item.startsWith('【单选题】')
+                    || item.startsWith('【多选题】')
+                    || item.startsWith('【填空题】')
+                    || item.startsWith('【下拉框】')
+                ) {
+                    let question = {
+                        isForce: "0",
+                        isDisplay: 1
+                    }
+
+                    // 类型
+                    const matches = item.match(/\【(.*?)\】/g)
+                    let type = 0
+                    switch (matches[0]) {
+                        case '【单选题】':
+                            type = 2
+                            break
+                        case '【多选题】':
+                            type = 3
+                            break
+                        case '【填空题】':
+                            type = 4
+                            break
+                        case '【下拉框】':
+                            type = 1
+                            break
+                        default:
+                            type = 2
+                            break
+                    }
+                    question.type = type
+
+                    if (type !== 4) {
+                        let option = []
+                        let optionArr = item.split('\n').slice(1)
+                        optionArr.forEach((ele) => {
+                            option.push((ele.replace(/^([A-Z])./, '')).slice(0, -1))
+                        })
+
+                        question.option = option
+                        question.options = option.join('\n')
+                        question.title = item.match(/\】.*?\n/g)[0].slice(1, -1)
+                    }
+                    else {
+                        question.title = item.replace('【填空题】', '')
+                    }
+                    questionnaire.questions.push(question)
+                }
+            })
+
+            console.log(questionnaire)
+        }
+
+        renderQuestionnaire(content)
+    </script>
+</body>
+</html>
