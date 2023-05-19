@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /**
+    * nth-of-type 只匹配类名对应的标签 .test 对应的标签是 h1 
+    * 找到对应位置的元素后 还要匹配类名
+    */
+    .test:nth-of-type(1) {
+        background: pink;
+    }
+</style>
+<body>
+    <h1 class="test">123</h1>
+    <p>123</p>
+    <h1 class="test">123</h1>
+    <h1 class="test">123</h1>
+
+</body>
+</html>
