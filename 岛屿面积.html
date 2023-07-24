@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * @param {number[][]} grid
+         * @return {number}
+         */
+        var maxAreaOfIsland = function(grid) {
+            let m = grid[0].length, n = grid.length
+            let newGrid = []
+            let max = 0
+
+            for (let i = 0; i < n; i++) {
+                let gridItem = []
+                for (let j = 0; j < m; j++) {
+                    let item = { val: grid[i][j], isVisited: false }
+                    gridItem.push(item)
+                }
+                newGrid.push(gridItem)
+            }
+
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < m; j++) {
+                    if (!newGrid[i][j].isVisited && newGrid[i][j].val) {
+                        maxIsland(i, j)
+                    }
+                }
+            }
+
+            function maxIsland (x, y) {
+                let curLinked = 0
+
+                findLinkedIsland(x, y)
+
+                function findLinkedIsland(x, y, lastLinkedNum = 0) {
+                    if (x < 0 || x >= n || y < 0 || y >= m) {
+                        return
+                    }
+
+                    console.log(newGrid, x, y)
+
+                    if (newGrid[x][y].isVisited) {
+                        return
+                    }
+
+                    newGrid[x][y].isVisited = true
+
+                    let val = newGrid[x][y].val
+
+                    if (val) {
+                        console.log(1)
+                        curLinked = lastLinkedNum + 1
+
+                        if (max < curLinked) {
+                            max = curLinked
+                        }
+                        // top
+                        findLinkedIsland(x, y - 1, curLinked)
+                        // bottom
+                        findLinkedIsland(x, y + 1, curLinked)
+                        // left
+                        findLinkedIsland(x - 1, y, curLinked)
+                        // right
+                        findLinkedIsland(x + 1, y, curLinked)
+                    }
+                }
+
+                curLinked = 0
+            }
+
+            console.log(newGrid)
+
+
+            return max
+        };
+
+        
+        // 版本二：不需要 isVisited 只需要重置为 1
+        var maxAreaOfIsland = function(grid) {
+            let m = grid[0].length, n = grid.length
+            let max = 0
+
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < m; j++) {
+                    if (grid[i][j]) {
+                        maxIsland(i, j)
+                    }
+                }
+            }
+
+            function maxIsland (x, y) {
+                let curLinked = 0
+
+                findLinkedIsland(x, y)
+
+                function findLinkedIsland(x, y, lastLinkedNum = 0) {
+                    if (x < 0 || x >= n || y < 0 || y >= m || !grid[x][y]) {
+                        return
+                    }
+
+                    grid[x][y] = 0
+
+                    curLinked = lastLinkedNum + 1
+
+                    // top
+                    findLinkedIsland(x, y - 1, curLinked)
+                    // bottom
+                    findLinkedIsland(x, y + 1, curLinked)
+                    // left
+                    findLinkedIsland(x - 1, y, curLinked)
+                    // right
+                    findLinkedIsland(x + 1, y, curLinked)
+                }
+
+                if (max < curLinked) {
+                    max = curLinked
+                }
+
+                curLinked = 0
+            }
+
+            return max
+        };
+        
+        maxAreaOfIsland([[0,0,1,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,1,1,0,1,0,0,0,0,0,0,0,0],[0,1,0,0,1,1,0,0,1,0,1,0,0],[0,1,0,0,1,1,0,0,1,1,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,0,0,0,0,0,0,1,1,0,0,0,0]])
+    </script>
+</body>
+</html>
