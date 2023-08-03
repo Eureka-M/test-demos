@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Share</title>
+</head>
+<body>
+    <div>
+        <video id="gum-local" autoplay playsinline muted></video>
+        <button id="startButton" disabled>Start</button>
+        <div id="errorMsg"></div>
+    </div>
+    <script>
+        const startButton = document.getElementById('startButton');
+
+        if ((navigator.mediaDevices && 'getDisplayMedia' in navigator.mediaDevices)) {
+            startButton.disabled = false;
+        } else {
+            errorMsg('不支持getDisplayMedia');
+        }
+
+
+        startButton.addEventListener('click', () => {
+            navigator.mediaDevices.getDisplayMedia({ video: true })
+                .then(handleSuccess, handleError)
+        });
+
+        function handleSuccess(stream) {
+            startButton.disabled = true;
+            const video = document.querySelector('video');
+            video.srcObject = stream;
+
+            // 检测用户已停止共享屏幕
+            // 通过浏览器 UI 共享屏幕
+            stream.getVideoTracks()[0].addEventListener('ended', () => {
+                    errorMsg('用户已结束共享屏幕');
+                    startButton.disabled = false;
+            });
+        }
+
+        function handleError(error) {
+            errorMsg(`getDisplayMedia error: ${error.name}`, error);
+        }
+
+        function errorMsg(msg, error) {
+            const errorElement = document.querySelector('#errorMsg');
+            errorElement.innerHTML += `<p>${msg}</p>`;
+            if (typeof error !== 'undefined') {
+                    console.error(error);
+            }
+        }
+
+    </script>
+</body>
+</html>
