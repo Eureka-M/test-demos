@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function Permutation(str) {
+        //     const result = [];
+        //     if (str) {
+        //         queue = str.split('')
+        //         PermutationCore(queue, result);
+        //     }
+        //     result.sort();
+        //     return [... new Set(result)];
+        // }
+
+        // function PermutationCore(queue, result, temp = "", current = "") {
+        //     current += temp;
+        //     if (queue.length === 0) {
+        //         result.push(current);
+        //         return;
+        //     }
+        //     for (let i = 0; i < queue.length; i++) {
+        //         temp = queue.shift();
+        //         PermutationCore(queue, result, temp, current);
+        //         queue.push(temp);
+        //         console.log(`queue: ${queue}, result: ${result}, temp: ${temp}, current: ${current}`)
+        //     }
+        // }
+
+        // Permutation('abc')
+
+        var letterCombinations = function(digits) {
+            let result = []
+            if (digits == '') {
+                return []
+            }
+            
+            const map = {
+                '2': ['a', 'b', 'c'],
+                '3': ['d', 'e', 'f'],
+                '4': ['g', 'h', 'i'],
+                '5': ['j', 'k', 'l'],
+                '6': ['m', 'n', 'o'],
+                '7': ['p', 'q', 'r', 's'],
+                '8': ['t', 'u', 'v'],
+                '9': ['w', 'x', 'y', 'z']
+            }
+
+            let path = []
+            digits.split('').forEach((item) => {
+                path.push(map[item])
+            })
+
+            // path [[a, b, c], [d, e, f]]
+
+            backTracking(path) 
+
+
+            function backTracking(path, curStr = '', tempStr = '') {
+                curStr += tempStr // a
+
+                if (path.length == 0) {
+                    result.push(curStr)
+                    return
+                }
+
+                let temp = path.shift() // temp: [a, b, c], path: [d, e, f]
+                for (let i = 0; i < temp.length; i++) {
+                    tempStr = temp[i] // ad
+                    
+                    backTracking(path, curStr, tempStr) // [d, e, f], '', a
+                    
+                }
+                path.push(temp)
+            }
+
+        
+            return result
+        };
+
+    </script>
+</body>
+</html>
